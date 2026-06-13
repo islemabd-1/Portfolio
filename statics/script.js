@@ -1,4 +1,110 @@
-// Mobile Navigation Toggle
+// ── Network Canvas Animation ──────────────────────────────────────────────────
+(function () {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'hero-canvas';
+    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+    hero.style.position = 'relative';
+    hero.prepend(canvas);
+
+    const ctx = canvas.getContext('2d');
+    const ACCENT = '78,205,196';
+    const NODE_COUNT = 80;
+    const MAX_DIST = 140;
+    const MOUSE_RADIUS = 180;
+
+    let W, H, nodes, mouse = { x: -9999, y: -9999 };
+
+    function resize() {
+        W = canvas.width  = hero.offsetWidth;
+        H = canvas.height = hero.offsetHeight;
+    }
+
+    function makeNode() {
+        return {
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            r: Math.random() * 2 + 1.5,
+        };
+    }
+
+    function init() {
+        resize();
+        nodes = Array.from({ length: NODE_COUNT }, makeNode);
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        nodes.forEach(n => {
+            const dx = mouse.x - n.x;
+            const dy = mouse.y - n.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < MOUSE_RADIUS) {
+                n.vx += (dx / dist) * 0.03;
+                n.vy += (dy / dist) * 0.03;
+            }
+
+            const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+            if (speed > 1.2) { n.vx *= 0.95; n.vy *= 0.95; }
+
+            n.x += n.vx;
+            n.y += n.vy;
+
+            if (n.x < 0 || n.x > W) n.vx *= -1;
+            if (n.y < 0 || n.y > H) n.vy *= -1;
+        });
+
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const a = nodes[i], b = nodes[j];
+                const dx = a.x - b.x, dy = a.y - b.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_DIST) {
+                    const alpha = (1 - dist / MAX_DIST) * 0.35;
+                    ctx.beginPath();
+                    ctx.strokeStyle = 'rgba(' + ACCENT + ',' + alpha + ')';
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        nodes.forEach(n => {
+            const dx = mouse.x - n.x, dy = mouse.y - n.y;
+            const near = Math.sqrt(dx * dx + dy * dy) < MOUSE_RADIUS;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, near ? n.r * 1.8 : n.r, 0, Math.PI * 2);
+            ctx.fillStyle = near ? 'rgba(' + ACCENT + ',0.9)' : 'rgba(' + ACCENT + ',0.5)';
+            ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    hero.addEventListener('mousemove', e => {
+        const rect = hero.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+    hero.addEventListener('mouseleave', () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+    });
+
+    window.addEventListener('resize', resize);
+
+    init();
+    draw();
+})();
+
+// ── Mobile Navigation Toggle ──────────────────────────────────────────────────
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
@@ -7,7 +113,6 @@ hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// Close mobile menu when clicking a link
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -40,7 +145,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Animate elements on scroll
 document.querySelectorAll('.project-card, .tech-category, .skill-item').forEach((el) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -58,16 +162,13 @@ if (contactForm) {
     });
 }
 
-// Smooth scroll for anchor links
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
