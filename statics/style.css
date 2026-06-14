@@ -16,6 +16,18 @@
     box-sizing: border-box;
 }
 
+/* ── Accessibility: visible focus states for keyboard navigation ── */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Remove default outline only when :focus-visible is supported */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -72,9 +84,10 @@ nav.scrolled {
     color: var(--color-text);
     text-decoration: none;
     font-size: 0.75rem;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.15em;
     transition: color 0.3s ease;
+    padding: 0.5rem 0.25rem; /* larger touch target */
 }
 
 .nav-links a:hover {
@@ -190,11 +203,11 @@ nav.scrolled {
 
 .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 7rem);
-    font-weight: 400;
-    line-height: 1.1;
+    font-size: clamp(3.2rem, 8vw, 7rem);
+    font-weight: 700;
+    line-height: 1.05;
     margin-bottom: 2rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     animation: fadeInUp 0.8s ease-out 0.5s both;
 }
 
@@ -294,9 +307,9 @@ nav.scrolled {
 .work-title {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 400;
+    font-weight: 700;
     color: var(--color-text);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     margin-bottom: 1rem;
 }
 
@@ -596,8 +609,9 @@ nav.scrolled {
 .about-text h2 {
     font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 400;
+    font-weight: 700;
     margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
 }
 
 .accent-text {
@@ -682,9 +696,10 @@ nav.scrolled {
 .section-title {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 400;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 1rem;
+    letter-spacing: -0.03em;
 }
 
 .section-subtitle {
@@ -777,8 +792,9 @@ nav.scrolled {
 .contact-left h2 {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 400;
+    font-weight: 700;
     margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
 }
 
 .contact-left p {
@@ -852,20 +868,28 @@ nav.scrolled {
 
 .form-group input,
 .form-group textarea {
-    padding: 1rem;
-    background: rgba(10, 10, 10, 0.5);
+    padding: 1rem 1.2rem;
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--color-border);
     color: var(--color-text);
     font-family: var(--font-body);
     font-size: 0.95rem;
     transition: all 0.3s ease;
     border-radius: 8px;
+    width: 100%;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255,255,255,0.3);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--color-accent);
+    background: rgba(78, 205, 196, 0.05);
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.12);
 }
 
 .submit-btn {
