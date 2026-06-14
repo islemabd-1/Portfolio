@@ -6,6 +6,8 @@
     --color-border: #2c2c2e;
     --font-display: 'Syne', sans-serif;
     --font-body: 'Work Sans', sans-serif;
+    --section-padding: 7rem 4rem;
+    --section-padding-mobile: 5rem 1.5rem;
 }
 
 * {
@@ -208,7 +210,7 @@ nav.scrolled {
     font-weight: 300;
     line-height: 1.8;
     margin: 0 auto 3rem;
-    color: #b8b8b8;
+    color: #c8c8c8;
     animation: fadeInUp 0.8s ease-out 0.7s both;
 }
 
@@ -221,30 +223,33 @@ nav.scrolled {
 }
 
 .cta-button {
-    padding: 1.2rem 2.5rem;
+    padding: 1.2rem 3rem;
     background: var(--color-accent);
     color: var(--color-bg);
     text-decoration: none;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    font-weight: 700;
     transition: all 0.3s ease;
     text-transform: uppercase;
     border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(78, 205, 196, 0.35);
+    border: 2px solid var(--color-accent);
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(78, 205, 196, 0.5);
+    background: #5fe0d7;
 }
 
 .cta-outline {
-    padding: 1.2rem 2.5rem;
-    color: var(--color-text);
+    padding: 1.2rem 3rem;
+    color: rgba(255,255,255,0.75);
     text-decoration: none;
-    border: 1px solid var(--color-text);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
     font-weight: 600;
     transition: all 0.3s ease;
     text-transform: uppercase;
@@ -277,7 +282,7 @@ nav.scrolled {
 
 /* Works Section */
 .work-section {
-    padding: 8rem 4rem;
+    padding: var(--section-padding);
     background: var(--color-bg);
 }
 
@@ -412,7 +417,7 @@ nav.scrolled {
 
 .project-content p {
     font-weight: 300;
-    color: #b8b8b8;
+    color: #c8c8c8;
     line-height: 1.7;
     margin-bottom: 1.5rem;
 }
@@ -552,7 +557,7 @@ nav.scrolled {
 
 /* About Section */
 .about-section {
-    padding: 8rem 4rem;
+    padding: var(--section-padding);
     background: var(--color-secondary);
 }
 
@@ -605,7 +610,7 @@ nav.scrolled {
     font-weight: 300;
     line-height: 1.8;
     margin-bottom: 2rem;
-    color: #b8b8b8;
+    color: #c8c8c8;
 }
 
 .about-highlights {
@@ -670,7 +675,7 @@ nav.scrolled {
 
 /* Skills Section */
 .skills-section {
-    padding: 8rem 4rem;
+    padding: var(--section-padding);
     background: var(--color-bg);
 }
 
@@ -684,7 +689,7 @@ nav.scrolled {
 
 .section-subtitle {
     text-align: center;
-    color: #b8b8b8;
+    color: #c8c8c8;
     font-size: 1rem;
     margin-bottom: 5rem;
 }
@@ -757,7 +762,7 @@ nav.scrolled {
 
 /* Contact Section */
 .contact-section {
-    padding: 8rem 4rem;
+    padding: var(--section-padding);
     background: var(--color-secondary);
 }
 
@@ -780,7 +785,7 @@ nav.scrolled {
     font-weight: 300;
     line-height: 1.8;
     margin-bottom: 3rem;
-    color: #b8b8b8;
+    color: #c8c8c8;
 }
 
 .contact-info {
@@ -842,7 +847,7 @@ nav.scrolled {
 .form-group label {
     font-size: 0.75rem;
     letter-spacing: 0.1em;
-    color: #888;
+    color: #aaaaaa;
 }
 
 .form-group input,
@@ -892,7 +897,7 @@ footer {
     border-top: 1px solid var(--color-border);
     font-weight: 300;
     font-size: 0.85rem;
-    color: #666;
+    color: #999999;
 }
 
 /* Responsive */
@@ -963,7 +968,7 @@ footer {
     .about-section,
     .skills-section,
     .contact-section {
-        padding: 5rem 2rem;
+        padding: var(--section-padding-mobile);
     }
 
     .projects-grid {
