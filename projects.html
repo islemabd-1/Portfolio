@@ -33,6 +33,20 @@
       overflow-x: hidden;
     }
 
+    /* ── Full-page Network Canvas ── */
+    #bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav, .page-header, .filter-section, .project-count, .projects-section, footer {
+      position: relative;
+      z-index: 1;
+    }
+
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -210,7 +224,8 @@
     }
 
     .project-card {
-      background: var(--color-secondary);
+      background: rgba(26,26,26,0.85);
+      backdrop-filter: blur(8px);
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--color-border);
@@ -224,9 +239,7 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
-    .project-card.hidden {
-      display: none;
-    }
+    .project-card.hidden { display: none; }
 
     .project-image {
       width: 100%;
@@ -243,11 +256,8 @@
       transition: transform 0.5s ease;
     }
 
-    .project-card:hover .project-image img {
-      transform: scale(1.05);
-    }
+    .project-card:hover .project-image img { transform: scale(1.05); }
 
-    /* Category badge on image */
     .project-category-badge {
       position: absolute;
       top: 1rem;
@@ -261,11 +271,10 @@
       z-index: 2;
     }
 
-    .badge-ai   { background: rgba(78,205,196,0.15); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.4); }
+    .badge-ai   { background: rgba(78,205,196,0.15);  color: #4ecdc4; border: 1px solid rgba(78,205,196,0.4); }
     .badge-web  { background: rgba(130,100,220,0.15); color: #a78bfa; border: 1px solid rgba(130,100,220,0.4); }
     .badge-data { background: rgba(250,165,60,0.15);  color: #faa53c; border: 1px solid rgba(250,165,60,0.4); }
 
-    /* GitHub overlay */
     .project-overlay {
       position: absolute;
       inset: 0;
@@ -275,7 +284,6 @@
       justify-content: center;
       opacity: 0;
       transition: opacity 0.3s ease;
-      border-radius: 0;
     }
 
     .project-card:hover .project-overlay { opacity: 1; }
@@ -289,10 +297,7 @@
 
     .project-overlay a:hover { transform: scale(1.2); }
 
-    /* Card content */
-    .project-content {
-      padding: 1.6rem;
-    }
+    .project-content { padding: 1.6rem; }
 
     .project-content h3 {
       font-family: var(--font-display);
@@ -309,11 +314,7 @@
       margin-bottom: 1.2rem;
     }
 
-    .project-tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
     .tag {
       padding: 0.3rem 0.85rem;
@@ -326,12 +327,8 @@
       transition: all 0.25s ease;
     }
 
-    .tag:hover {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
-    }
+    .tag:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
-    /* ── EMPTY STATE ── */
     .empty-state {
       display: none;
       text-align: center;
@@ -339,17 +336,8 @@
       color: #444;
     }
 
-    .empty-state i {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: #333;
-    }
+    .empty-state i { font-size: 3rem; margin-bottom: 1rem; color: #333; }
 
-    .empty-state p {
-      font-size: 1rem;
-    }
-
-    /* ── BACK LINK ── */
     .back-link {
       display: inline-flex;
       align-items: center;
@@ -364,7 +352,6 @@
 
     .back-link:hover { color: var(--color-accent); }
 
-    /* ── FOOTER ── */
     footer {
       text-align: center;
       padding: 2rem;
@@ -374,32 +361,14 @@
       font-weight: 300;
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav {
-        width: calc(100% - 2rem);
-        top: 0.75rem;
-        padding: 0.75rem 1.5rem;
-      }
-
+      nav { width: calc(100% - 2rem); top: 0.75rem; padding: 0.75rem 1.5rem; }
       .resume-btn { display: none; }
-
-      .page-header,
-      .filter-section,
-      .project-count,
-      .projects-section {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-      }
-
+      .page-header, .filter-section, .project-count, .projects-section { padding-left: 1.5rem; padding-right: 1.5rem; }
       .page-header { padding-top: 8rem; }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
+      .projects-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── ANIMATIONS ── */
     .project-card {
       opacity: 0;
       transform: translateY(24px);
@@ -409,10 +378,12 @@
     @keyframes cardIn {
       to { opacity: 1; transform: translateY(0); }
     }
-
   </style>
 </head>
 <body>
+
+<!-- Full-page canvas -->
+<canvas id="bg-canvas"></canvas>
 
 <!-- Nav -->
 <nav>
@@ -440,23 +411,20 @@
 
 <!-- Count -->
 <div class="project-count">
-  Showing <span id="visible-count">6</span> projects
+  Showing <span id="visible-count">4</span> projects
 </div>
 
 <!-- Projects -->
 <div class="projects-section">
   <div class="projects-grid" id="projects-grid">
 
-    <!-- Shape Recognizer -->
     <div class="project-card" data-category="ai">
       <div class="project-image">
         <span class="project-category-badge badge-ai">AI / ML</span>
         <img src="statics/images/shape recognizer.png" alt="Shape Recognizer AI">
         <div class="project-overlay">
           <a href="https://github.com/islemabd-1/ShapeRecognize" target="_blank" aria-label="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
         </div>
       </div>
@@ -464,26 +432,19 @@
         <h3>Shape Recognizer AI</h3>
         <p>Machine learning model achieving 97% accuracy in geometric shape classification and quality assessment using computer vision.</p>
         <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">TensorFlow</span>
-          <span class="tag">OpenCV</span>
-          <span class="tag">KNN</span>
-          <span class="tag">Random Forest</span>
-          <span class="tag">SVM</span>
+          <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span>
+          <span class="tag">KNN</span><span class="tag">Random Forest</span><span class="tag">SVM</span>
         </div>
       </div>
     </div>
 
-    <!-- Django Web App -->
     <div class="project-card" data-category="web">
       <div class="project-image">
         <span class="project-category-badge badge-web">Web</span>
         <img src="statics/images/web-project.png" alt="Django Web App">
         <div class="project-overlay">
           <a href="https://github.com/Anwrk/PFE" target="_blank" aria-label="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
         </div>
       </div>
@@ -491,23 +452,18 @@
         <h3>Django Web App</h3>
         <p>Full-stack Django application with authentication and SQLite3 database.</p>
         <div class="project-tags">
-          <span class="tag">Django</span>
-          <span class="tag">SQLite3</span>
-          <span class="tag">HTML/CSS</span>
+          <span class="tag">Django</span><span class="tag">SQLite3</span><span class="tag">HTML/CSS</span>
         </div>
       </div>
     </div>
 
-    <!-- Arabic Poetry -->
     <div class="project-card" data-category="ai">
       <div class="project-image">
         <span class="project-category-badge badge-ai">AI / ML</span>
         <img src="statics/images/Awzan.png" alt="Arabic Poetry AI">
         <div class="project-overlay">
           <a href="https://github.com/islemabd-1/Arabic-poetry" target="_blank" aria-label="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
         </div>
       </div>
@@ -515,27 +471,19 @@
         <h3>Arabic Poetry Intelligent App</h3>
         <p>Deep learning model for classifying Arabic poetry based on thematic and stylistic features using Bi-LSTM and AraBERT.</p>
         <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">PyTorch</span>
-          <span class="tag">AraBERT</span>
-          <span class="tag">Bi-LSTM</span>
-          <span class="tag">NLP</span>
+          <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">AraBERT</span>
+          <span class="tag">Bi-LSTM</span><span class="tag">NLP</span>
         </div>
       </div>
     </div>
 
-
-
-    <!-- Lung Cancer -->
     <div class="project-card" data-category="data">
       <div class="project-image">
-        <span class="project-category-badge badge-ai">AI / DS</span>
+        <span class="project-category-badge badge-data">AI / DS</span>
         <img src="statics/images/lung.png" alt="Lung Cancer Classification">
         <div class="project-overlay">
           <a href="https://github.com/YOUR_USERNAME/lung-cancer" target="_blank" aria-label="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
         </div>
       </div>
@@ -543,16 +491,13 @@
         <h3>Lung Cancer Gene Classification</h3>
         <p>Gene expression classification using Filter, Wrapper, and Embedded feature selection with KNN, LR, RF, and SVM classifiers.</p>
         <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">Scikit-learn</span>
-          <span class="tag">SVM</span>
-          <span class="tag">Feature Selection</span>
+          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">SVM</span><span class="tag">Feature Selection</span>
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- Empty state -->
   <div class="empty-state" id="empty-state">
     <i class="fas fa-folder-open"></i>
     <p>No projects in this category yet.</p>
@@ -564,44 +509,97 @@
 </footer>
 
 <script>
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.project-card');
-  const countEl = document.getElementById('visible-count');
-  const emptyState = document.getElementById('empty-state');
+// ── Full-page Network Canvas (same as index) ──────────────────────────────
+(function () {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const ACCENT = '78,205,196';
+  const NODE_COUNT = 100;
+  const MAX_DIST = 150;
+  const MOUSE_RADIUS = 200;
+  let W, H, nodes, mouse = { x: -9999, y: -9999 };
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
 
-      const filter = btn.dataset.filter;
-      let visible = 0;
-      let delay = 0;
+  function makeNode() {
+    return { x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-0.5)*0.45, vy: (Math.random()-0.5)*0.45, r: Math.random()*2+1.5 };
+  }
 
-      cards.forEach(card => {
-        const cats = card.dataset.category.split(' ');
-        const show = filter === 'all' || cats.includes(filter);
+  function init() { resize(); nodes = Array.from({ length: NODE_COUNT }, makeNode); }
 
-        if (show) {
-          card.style.display = '';
-          // Reset and re-trigger animation with staggered delay
-          card.style.animation = 'none';
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(24px)';
-          card.offsetHeight; // force reflow
-          card.style.animation = '';
-          card.style.animationDelay = (delay * 0.07) + 's';
-          delay++;
-          visible++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      countEl.textContent = visible;
-      emptyState.style.display = visible === 0 ? 'block' : 'none';
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    nodes.forEach(n => {
+      const dx = mouse.x-n.x, dy = mouse.y-n.y;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if (dist < MOUSE_RADIUS) { n.vx += (dx/dist)*0.03; n.vy += (dy/dist)*0.03; }
+      const speed = Math.sqrt(n.vx*n.vx+n.vy*n.vy);
+      if (speed > 1.2) { n.vx *= 0.95; n.vy *= 0.95; }
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
     });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i+1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x-b.x, dy = a.y-b.y;
+        const d = Math.sqrt(dx*dx+dy*dy);
+        if (d < MAX_DIST) {
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba('+ACCENT+','+(1-d/MAX_DIST)*0.25+')';
+          ctx.lineWidth = 0.8;
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      const dx = mouse.x-n.x, dy = mouse.y-n.y;
+      const near = Math.sqrt(dx*dx+dy*dy) < MOUSE_RADIUS;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, near ? n.r*1.8 : n.r, 0, Math.PI*2);
+      ctx.fillStyle = near ? 'rgba('+ACCENT+',0.9)' : 'rgba('+ACCENT+',0.35)';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+  window.addEventListener('resize', resize);
+  init(); draw();
+})();
+
+// ── Filter logic ──────────────────────────────────────────────────────────
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.project-card');
+const countEl = document.getElementById('visible-count');
+const emptyState = document.getElementById('empty-state');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    let visible = 0, delay = 0;
+    cards.forEach(card => {
+      const show = filter === 'all' || card.dataset.category.split(' ').includes(filter);
+      if (show) {
+        card.style.display = '';
+        card.style.animation = 'none';
+        card.style.opacity = '0';
+        card.offsetHeight;
+        card.style.animation = '';
+        card.style.animationDelay = (delay * 0.07) + 's';
+        delay++; visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    countEl.textContent = visible;
+    emptyState.style.display = visible === 0 ? 'block' : 'none';
   });
+});
 </script>
 
 </body>

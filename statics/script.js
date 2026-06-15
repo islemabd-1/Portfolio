@@ -1,33 +1,27 @@
-// ── Network Canvas Animation ──────────────────────────────────────────────────
+// ── Point 1: Full-page Network Canvas Background ───────────────────────────
 (function () {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-
-    const canvas = document.createElement('canvas');
-    canvas.id = 'hero-canvas';
-    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;';
-    hero.style.position = 'relative';
-    hero.prepend(canvas);
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     const ACCENT = '78,205,196';
-    const NODE_COUNT = 80;
-    const MAX_DIST = 140;
-    const MOUSE_RADIUS = 180;
+    const NODE_COUNT = 100;
+    const MAX_DIST = 150;
+    const MOUSE_RADIUS = 200;
 
     let W, H, nodes, mouse = { x: -9999, y: -9999 };
 
     function resize() {
-        W = canvas.width  = hero.offsetWidth;
-        H = canvas.height = hero.offsetHeight;
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
     }
 
     function makeNode() {
         return {
             x: Math.random() * W,
             y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
             r: Math.random() * 2 + 1.5,
         };
     }
@@ -55,7 +49,7 @@
                 const dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < MAX_DIST) {
                     ctx.beginPath();
-                    ctx.strokeStyle = 'rgba('+ACCENT+','+(1-dist/MAX_DIST)*0.35+')';
+                    ctx.strokeStyle = 'rgba('+ACCENT+','+(1-dist/MAX_DIST)*0.25+')';
                     ctx.lineWidth = 0.8;
                     ctx.moveTo(a.x, a.y);
                     ctx.lineTo(b.x, b.y);
@@ -69,24 +63,20 @@
             const near = Math.sqrt(dx*dx+dy*dy) < MOUSE_RADIUS;
             ctx.beginPath();
             ctx.arc(n.x, n.y, near ? n.r*1.8 : n.r, 0, Math.PI*2);
-            ctx.fillStyle = near ? 'rgba('+ACCENT+',0.9)' : 'rgba('+ACCENT+',0.5)';
+            ctx.fillStyle = near ? 'rgba('+ACCENT+',0.9)' : 'rgba('+ACCENT+',0.35)';
             ctx.fill();
         });
 
         requestAnimationFrame(draw);
     }
 
-    hero.addEventListener('mousemove', e => {
-        const rect = hero.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-    });
-    hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
     window.addEventListener('resize', resize);
     init(); draw();
 })();
 
-// ── Hamburger (checkbox-based) ────────────────────────────────────────────────
+// ── Hamburger ─────────────────────────────────────────────────────────────────
 const hamburgerCheck = document.getElementById('hamburger-check');
 const navLinks = document.querySelector('.nav-links');
 
@@ -94,8 +84,6 @@ if (hamburgerCheck) {
     hamburgerCheck.addEventListener('change', () => {
         navLinks.classList.toggle('active', hamburgerCheck.checked);
     });
-
-    // Close menu when a nav link is clicked
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             hamburgerCheck.checked = false;
@@ -107,11 +95,7 @@ if (hamburgerCheck) {
 // ── Navbar scroll effect ──────────────────────────────────────────────────────
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
-    if (window.scrollY > 100) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 100);
 });
 
 // ── Scroll animations ─────────────────────────────────────────────────────────
@@ -124,7 +108,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
-document.querySelectorAll('.project-card, .tech-category, .skill-item').forEach(el => {
+document.querySelectorAll('.project-card, .tech-category, .skill-item, .timeline-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -143,4 +127,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
-});
+}); 

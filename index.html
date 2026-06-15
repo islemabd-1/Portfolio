@@ -5,23 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio — Islem Abdelmouiz</title>
   <meta name="description" content="AI student specializing in Python, Django, and machine learning applications.">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" class="favicon" href="statics/images/me.jpg">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <link rel="stylesheet" href="statics/style.css">
 </head>
 <body>
+
+<canvas id="bg-canvas"></canvas>
 
 <!-- Navigation -->
 <nav>
@@ -45,18 +39,16 @@
 
 <!-- Hero -->
 <section class="hero">
- 
   <div class="hero-content">
-    <div class="hero-label">DEVELOPER & AI ENGINEER</div>
-
-    <h1>
-      Islem <span class="hero-accent">Abdelmouiz</span>
-    </h1>
-
+    <div class="hero-label">
+      <span class="hero-label-tag">DEVELOPER</span>
+      <span class="hero-label-sep"></span>
+      <span class="hero-label-tag accent">AI ENGINEER</span>
+    </div>
+    <h1>Islem <span class="hero-accent">Abdelmouiz</span></h1>
     <p class="hero-description">
       Building scalable web applications and AI-driven systems focused on performance, clarity, and real-world impact.
     </p>
-
     <div class="hero-actions">
       <a href="#work" class="cta-button">VIEW MY PROJECTS</a>
       <a href="#contact" class="cta-outline">CONTACT ME</a>
@@ -67,148 +59,139 @@
 <!-- Projects -->
 <section id="work" class="work-section">
   <div class="work-header">
-    <h2 class="work-title">
-      My <span class="work-accent">Projects</span>
-    </h2>
+    <h2 class="work-title">My <span class="work-accent">Projects</span></h2>
     <div class="work-underline"></div>
   </div>
-
   <div class="projects-grid">
-
     <div class="project-card">
       <div class="project-image">
         <img src="statics/images/shape recognizer.png" alt="Shape Recognizer AI" width="600" height="300">
         <div class="project-overlay">
           <div class="project-overlay-content">
             <h3>Shape Recognizer AI</h3>
-             <a href="https://github.com/islemabd-1/ShapeRecognize" target="_blank" aria-label="GitHub">
-               <i class="fab fa-github"></i>
-            </a>
+            <a href="https://github.com/islemabd-1/ShapeRecognize" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
       </div>
       <div class="project-content">
         <h3>Shape Recognizer AI</h3>
-        <p>
-         Machine learning model achieving 97% accuracy in geometric shape classification and quality assessment using computer vision.
-        </p>
+        <p>Machine learning model achieving 97% accuracy in geometric shape classification and quality assessment using computer vision.</p>
         <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">TensorFlow</span>
-          <span class="tag">OpenCV</span>
-          <span class="tag">Knn</span>
-          <span class="tag">Random forest</span>
-          <span class="tag">SVM</span>
+          <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span>
+          <span class="tag">Knn</span><span class="tag">Random forest</span><span class="tag">SVM</span>
         </div>
       </div>
     </div>
-
     <div class="project-card">
       <div class="project-image">
         <img src="statics/images/web-project.png" alt="Django Web App" width="600" height="300">
         <div class="project-overlay">
           <div class="project-overlay-content">
             <h3>Django web App</h3>
-             <a href="https://github.com/Anwrk/PFE" target="_blank" aria-label="GitHub">
-               <i class="fab fa-github"></i>
-             </a>
+            <a href="https://github.com/Anwrk/PFE" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
       </div>
       <div class="project-content">
         <h3>Django Web App</h3>
-        <p>
-          Full-stack Django application with authentication and sqlite3 database.
-        </p>
+        <p>Full-stack Django application with authentication and sqlite3 database.</p>
         <div class="project-tags">
-          <span class="tag">Django</span>
-          <span class="tag">sqlite3</span>
-          <span class="tag">HTML/CSS</span>
+          <span class="tag">Django</span><span class="tag">sqlite3</span><span class="tag">HTML/CSS</span>
         </div>
       </div>
     </div>
-
     <div class="project-card">
       <div class="project-image">
-       <img src="statics/images/Awzan.png" alt="Arabic Poetry Intelligent app" width="600" height="300">
+        <img src="statics/images/Awzan.png" alt="Arabic Poetry Intelligent app" width="600" height="300">
         <div class="project-overlay">
           <div class="project-overlay-content">
             <h3>Arabic Poetry Classification</h3>
-             <a href="https://github.com/islemabd-1/Arabic-poetry" target="_blank" aria-label="GitHub">
-                 <i class="fab fa-github"></i>
-            </a>
+            <a href="https://github.com/islemabd-1/Arabic-poetry" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
       </div>
       <div class="project-content">
-        <h3>Arabic Poetry Intelligent app </h3>
-        <p>
-          Deep  learning model for classifying Arabic poetry based on thematic and stylistic features.
-        </p>
+        <h3>Arabic Poetry Intelligent app</h3>
+        <p>Deep learning model for classifying Arabic poetry based on thematic and stylistic features.</p>
         <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">Pandas</span>
-          <span class="tag">NumPy</span>
+          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span>
         </div>
       </div>
     </div>
-
   </div>
-
   <div class="see-more-wrapper">
     <a href="projects.html" class="see-more-btn"><span>See More</span></a>
   </div>
-
 </section>
 
 <!-- About -->
 <section id="about" class="about-section">
+
+  <!-- Title OUTSIDE the grid, left-aligned like Projects -->
+  <div class="work-header">
+    <h2 class="work-title">About <span class="work-accent">Me</span></h2>
+    <div class="work-underline"></div>
+  </div>
+
   <div class="about-content">
     <div class="about-image">
-      <img src="statics/images/me.jpg" alt="Islem Abdelmouiz" width="400" height="400">
+      <img src="statics/images/me.jpg" alt="Islem Abdelmouiz" width="800" height="600">
       <div class="image-border"></div>
     </div>
-
     <div class="about-text">
-      <h2>Developer & <span class="accent-text">Problem Solver</span></h2>
-      <p>
-        Passionate about building clean, efficient systems that combine strong engineering with intelligent solutions. I specialize in bridging the gap between complex AI algorithms and intuitive user experiences.
-      </p>
-
+      <p>Passionate about building clean, efficient systems that combine strong engineering with intelligent solutions. I specialize in bridging the gap between complex AI algorithms and intuitive user experiences.</p>
       <ul class="about-highlights">
         <li><i class="fas fa-check-circle"></i> Computer Systems Graduate</li>
         <li><i class="fas fa-check-circle"></i> Focused on AI & Machine Learning</li>
         <li><i class="fas fa-check-circle"></i> Strong in Python & Django</li>
       </ul>
-
       <div class="skills-bars">
         <div class="skill-item">
-          <div class="skill-header">
-            <strong>Python</strong>
-            <span>90%</span>
-          </div>
+          <div class="skill-header"><strong>Python</strong><span>90%</span></div>
           <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header">
-            <strong>Django</strong>
-            <span>85%</span>
-          </div>
+          <div class="skill-header"><strong>Django</strong><span>85%</span></div>
           <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header">
-            <strong>HTML / CSS</strong>
-            <span>65%</span>
-          </div>
+          <div class="skill-header"><strong>HTML / CSS</strong><span>65%</span></div>
           <div class="skill-bar"><div class="skill-progress" style="width:65%"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header">
-            <strong>AI / ML</strong>
-            <span>80%</span>
-          </div>
+          <div class="skill-header"><strong>AI / ML</strong><span>80%</span></div>
           <div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div>
+        </div>
+      </div>
+      <!-- Career Timeline -->
+      <div class="career-timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"><i class="fas fa-briefcase"></i></div>
+          <div class="timeline-info">
+            <h4 class="timeline-role">Title @Company</h4>
+            <span class="timeline-date">Month'YY – Present</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"><i class="fas fa-laptop-code"></i></div>
+          <div class="timeline-info">
+            <h4 class="timeline-role">Title @Company</h4>
+            <span class="timeline-date">Month'YY – Month'YY</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"><i class="fas fa-graduation-cap"></i></div>
+          <div class="timeline-info">
+            <h4 class="timeline-role">Title @Company</h4>
+            <span class="timeline-date">Month'YY – Month'YY</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"><i class="fas fa-university"></i></div>
+          <div class="timeline-info">
+            <h4 class="timeline-role">Title @Place</h4>
+            <span class="timeline-date">Month'YY</span>
+          </div>
         </div>
       </div>
     </div>
@@ -217,75 +200,49 @@
 
 <!-- Skills -->
 <section id="skills" class="skills-section">
-  <h2 class="section-title">Technical <span class="accent-text">Arsenal</span></h2>
+  <div class="work-header">
+    <h2 class="work-title">My <span class="work-accent">Skills</span></h2>
+    <div class="work-underline"></div>
+  </div>
   <p class="section-subtitle">Tools and technologies I use to bring ideas to life</p>
-
   <div class="tech-grid">
     <div class="tech-category">
       <div class="tech-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-dashed-bottom-code-icon lucide-square-dashed-bottom-code"><path d="M10 9.5 8 12l2 2.5"/><path d="M14 21h1"/><path d="m14 9.5 2 2.5-2 2.5"/><path d="M5 21a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2"/><path d="M9 21h1"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9.5 8 12l2 2.5"/><path d="M14 21h1"/><path d="m14 9.5 2 2.5-2 2.5"/><path d="M5 21a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2"/><path d="M9 21h1"/></svg>
       </div>
       <h3>Languages</h3>
       <div class="tech-items">
-        <span class="tech-badge">Python</span>
-        <span class="tech-badge">Java</span>
-        <span class="tech-badge">C</span>
-        <span class="tech-badge">HTML/CSS</span>
+        <span class="tech-badge">Python</span><span class="tech-badge">Java</span>
+        <span class="tech-badge">C</span><span class="tech-badge">HTML/CSS</span>
       </div>
     </div>
-
     <div class="tech-category">
       <div class="tech-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path fill="currentColor" d="M23.186 9.07L21.41 8.019a2.78 2.78 0 0 1-1.344-2.391V3.523c0-.431-.19-.837-.516-1.108A12 12 0 0 0 16.317.493a1.36 1.36 0 0 0-1.193.091L13.347 1.64a2.62 2.62 0 0 1-2.688 0L8.882.584a1.35 1.35 0 0 0-1.194-.09a12 12 0 0 0-3.231 1.918a1.44 1.44 0 0 0-.516 1.108v2.104c0 .986-.51 1.897-1.344 2.392L.823 9.068c-.363.215-.61.588-.675 1.013A12 12 0 0 0 0 12.001q0 .978.145 1.916c.065.425.312.801.675 1.016l1.774 1.052a2.78 2.78 0 0 1 1.344 2.392v2.104c0 .431.191.837.516 1.108c.965.8 2.054 1.452 3.231 1.919c.393.155.831.124 1.194-.091l1.777-1.055a2.62 2.62 0 0 1 2.688 0l1.777 1.055c.363.215.804.246 1.193.091a12 12 0 0 0 3.232-1.92a1.44 1.44 0 0 0 .516-1.107v-2.104a2.78 2.78 0 0 1 1.344-2.392l1.774-1.052c.363-.215.61-.588.675-1.016q.143-.938.145-1.916q0-.98-.145-1.917a1.41 1.41 0 0 0-.67-1.013zM12.003 19.41c-3.981 0-7.21-3.317-7.21-7.407s3.229-7.406 7.21-7.406s7.21 3.316 7.21 7.406s-3.23 7.407-7.21 7.407" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" fill="none" stroke="none"/><path fill="currentColor" d="M23.186 9.07L21.41 8.019a2.78 2.78 0 0 1-1.344-2.391V3.523c0-.431-.19-.837-.516-1.108A12 12 0 0 0 16.317.493a1.36 1.36 0 0 0-1.193.091L13.347 1.64a2.62 2.62 0 0 1-2.688 0L8.882.584a1.35 1.35 0 0 0-1.194-.09a12 12 0 0 0-3.231 1.918a1.44 1.44 0 0 0-.516 1.108v2.104c0 .986-.51 1.897-1.344 2.392L.823 9.068c-.363.215-.61.588-.675 1.013A12 12 0 0 0 0 12.001q0 .978.145 1.916c.065.425.312.801.675 1.016l1.774 1.052a2.78 2.78 0 0 1 1.344 2.392v2.104c0 .431.191.837.516 1.108c.965.8 2.054 1.452 3.231 1.919c.393.155.831.124 1.194-.091l1.777-1.055a2.62 2.62 0 0 1 2.688 0l1.777 1.055c.363.215.804.246 1.193.091a12 12 0 0 0 3.232-1.92a1.44 1.44 0 0 0 .516-1.107v-2.104a2.78 2.78 0 0 1 1.344-2.392l1.774-1.052c.363-.215.61-.588.675-1.016q.143-.938.145-1.916q0-.98-.145-1.917a1.41 1.41 0 0 0-.67-1.013zM12.003 19.41c-3.981 0-7.21-3.317-7.21-7.407s3.229-7.406 7.21-7.406s7.21 3.316 7.21 7.406s-3.23 7.407-7.21 7.407"/></svg>
       </div>
       <h3>Frameworks</h3>
       <div class="tech-items">
         <span class="tech-badge">Django</span>
       </div>
     </div>
-
     <div class="tech-category">
       <div class="tech-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database-search-icon lucide-database-search">
-          <path d="M21 11.693V5"/>
-          <path d="m22 22-1.875-1.875"/>
-          <path d="M3 12a9 3 0 0 0 8.697 2.998"/>
-          <path d="M3 5v14a9 3 0 0 0 9.28 2.999"/>
-          <circle cx="18" cy="18" r="3"/>
-          <ellipse cx="12" cy="5" rx="9" ry="3"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.693V5"/><path d="m22 22-1.875-1.875"/><path d="M3 12a9 3 0 0 0 8.697 2.998"/><path d="M3 5v14a9 3 0 0 0 9.28 2.999"/><circle cx="18" cy="18" r="3"/><ellipse cx="12" cy="5" rx="9" ry="3"/></svg>
       </div>
       <h3>Data Science</h3>
       <div class="tech-items">
-        <span class="tech-badge">NumPy</span>
-        <span class="tech-badge">Pandas</span>
-        <span class="tech-badge">Matplotlib</span>
-        <span class="tech-badge">Scikit-learn</span>
-        <span class="tech-badge">SQL</span>
+        <span class="tech-badge">NumPy</span><span class="tech-badge">Pandas</span>
+        <span class="tech-badge">Matplotlib</span><span class="tech-badge">Scikit-learn</span><span class="tech-badge">SQL</span>
       </div>
     </div>
-
     <div class="tech-category">
       <div class="tech-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot-icon lucide-bot">
-            <path d="M12 8V4H8"/>
-            <rect width="16" height="12" x="4" y="8" rx="2"/>
-            <path d="M2 14h2"/>
-            <path d="M20 14h2"/>
-            <path d="M15 13v2"/>
-            <path d="M9 13v2"/>
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
       </div>
       <h3>AI / ML</h3>
       <div class="tech-items">
-        <span class="tech-badge">TensorFlow</span>
-        <span class="tech-badge">OpenCV</span>
-        <span class="tech-badge">PyTorch</span>
-        <span class="tech-badge">Computer Vision</span>
+        <span class="tech-badge">TensorFlow</span><span class="tech-badge">OpenCV</span>
+        <span class="tech-badge">PyTorch</span><span class="tech-badge">Computer Vision</span>
       </div>
     </div>
   </div>
@@ -293,20 +250,22 @@
 
 <!-- Contact -->
 <section id="contact" class="contact-section">
+
+  <!-- Title OUTSIDE the grid, left-aligned like Projects -->
+  <div class="work-header">
+    <h2 class="work-title">Contact  <span class="work-accent">Me</span></h2>
+    <div class="work-underline"></div>
+  </div>
+
   <div class="contact-container">
     <div class="contact-left">
-      <h2>Let's Work <span class="accent-text">Together</span></h2>
-      <p>
-        Interested in collaboration, internships, or projects? I'm always open to discussing new opportunities and innovative ideas.
-      </p>
-
+      <p>Interested in collaboration, internships, or projects? I'm always open to discussing new opportunities and innovative ideas.</p>
       <div class="contact-info">
         <div class="contact-item">
           <i class="fas fa-envelope"></i>
           <span>islamabdenabi11@gmail.com</span>
         </div>
       </div>
-
       <div class="social-links">
         <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -320,6 +279,5 @@
 </footer>
 
 <script src="statics/script.js"></script>
-
 </body>
-</html> 
+</html>
