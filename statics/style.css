@@ -150,11 +150,11 @@ nav.scrolled {
 
 /* Hero */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: 8rem 2rem 4rem;
+    padding: 12rem 2rem 4rem;
     text-align: center;
 }
 
@@ -520,7 +520,12 @@ footer { text-align: center; padding: 2rem; border-top: 1px solid var(--color-bo
     .nav-links.active { left: 0; }
     .resume-btn { display: none; }
     .hamburger-label { display: block; }
-    .hero { padding: 0 2rem; }
+   @media (max-width: 1024px) { /* Increased from 768px to catch small laptops and zoomed-in views */
+    .hero {
+        padding-top: 10rem; /* Give it a specific gap for mobile/tablet */
+        min-height: auto;   /* Let the content define the height instead of the screen */
+    }
+}
     .hero-actions { flex-direction: column; width: 100%; }
     .cta-button, .cta-outline { width: 100%; text-align: center; }
     .work-section, .about-section, .skills-section, .contact-section { padding: var(--section-padding-mobile); }
