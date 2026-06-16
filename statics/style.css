@@ -10,30 +10,36 @@
     --section-padding-mobile: 5rem 1.5rem;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { width: 100%; max-width: 100%; overflow-x: hidden; background: #0d0d0f; }
+body { width: 100%; max-width: 100%; overflow-x: hidden; background: #0d0d0f; /* Match your bg-canvas color */ }
 
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 4px; }
 :focus:not(:focus-visible) { outline: none; }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    
+}
 
 body {
     font-family: var(--font-body);
     background: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
-    overflow-x: hidden;
+    /* NO overflow-x: hidden here — it clips position:fixed children on Chrome/mobile */
 }
 
-/* ── Point 1: Full-page network canvas ── */
 #bg-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    max-width: none;
     pointer-events: none;
     z-index: 0;
+    display: block;
 }
 
 /* All sections need z-index above canvas */
@@ -60,11 +66,13 @@ nav {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 9999px;
+    transition: all 0.3s ease-in-out; 
 }
 
 nav.scrolled {
-    padding: 0.75rem 2rem;
-    background: rgba(13, 13, 15, 0.85);
+    top: 0.8rem; /* Moves the bar up slightly when scrolling */
+    padding: 0.75rem 2rem; /* Shinks it slightly, but smoothly now */
+    background: rgba(13, 13, 15, 0.95); /* Making it a bit darker helps readability */
     border-color: rgba(255,255,255,0.1);
 }
 
@@ -262,6 +270,10 @@ nav.scrolled {
 .cta-outline:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
 /* Works Section */
+section {
+    width: 100%;
+    box-sizing: border-box;
+}
 .work-section { padding: var(--section-padding); background: transparent; }
 
 .work-header { text-align: left; margin-bottom: 5rem; }
@@ -503,7 +515,7 @@ footer { text-align: center; padding: 2rem; border-top: 1px solid var(--color-bo
 }
 
 @media (max-width: 768px) {
-    nav { padding: 0.75rem 1.5rem; width: calc(100% - 2rem); top: 0.75rem; }
+    nav { padding: 0.75rem 1.5rem; width:100%; top: 0.75rem; }
     .nav-links { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: rgba(0,0,0,0.98); flex-direction: column; align-items: center; justify-content: center; gap: 2rem; transition: left 0.3s ease; z-index: 1000; }
     .nav-links.active { left: 0; }
     .resume-btn { display: none; }

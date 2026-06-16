@@ -127,4 +127,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
-}); 
+});
